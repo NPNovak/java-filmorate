@@ -24,7 +24,7 @@ public class UserControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if((user.getEmail() == null || user.getEmail().isBlank())){
+            if ((user.getEmail() == null || user.getEmail().isBlank())) {
                 throw new ValidationException("Электронная почта не может быть пустой");
             }
         });
@@ -41,7 +41,7 @@ public class UserControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if(!user.getEmail().contains("@")){
+            if (!user.getEmail().contains("@")) {
                 throw new ValidationException("Электронная почта должна содержать символ @");
             }
         });
@@ -58,7 +58,7 @@ public class UserControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if((user.getLogin() == null || user.getLogin().isBlank())){
+            if ((user.getLogin() == null || user.getLogin().isBlank())) {
                 throw new ValidationException("Логин не может быть пустым");
             }
         });
@@ -74,7 +74,7 @@ public class UserControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if(user.getLogin().contains(" ")){
+            if (user.getLogin().contains(" ")) {
                 throw new ValidationException("Логин не может содержать пробелы");
             }
         });
@@ -90,7 +90,7 @@ public class UserControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if(user.getBirthday().isAfter(LocalDate.now())){
+            if (user.getBirthday().isAfter(LocalDate.now())) {
                 throw new ValidationException("Дата рождения не может быть в будущем");
             }
         });

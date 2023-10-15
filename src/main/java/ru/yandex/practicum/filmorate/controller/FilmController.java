@@ -14,7 +14,7 @@ import java.util.*;
 public class FilmController {
     private final Map<Long, Film> films = new HashMap<>();
     private long generatedId;
-    public final static LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
+    private final static LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
 
     @GetMapping()
     public Collection<Film> getAll() {
@@ -24,28 +24,28 @@ public class FilmController {
     @PostMapping()
     public Film create(@RequestBody Film film) throws ValidationException {
         log.info("Создание фильма: " + film);
-        if(film.getName() == null || film.getName().isBlank()){
+        if (film.getName() == null || film.getName().isBlank()) {
             log.info("У фильма нет названия");
             throw new ValidationException("У фильма нет названия");
         }
 
-        if(film.getDescription().length() > 200){
+        if (film.getDescription().length() > 200) {
             log.info("Длина описания больше 200 символов");
             throw new ValidationException("Длина описания больше 200 символов");
         }
 
-        if(film.getReleaseDate().isBefore(START_RELEASE_DATE)){
+        if (film.getReleaseDate().isBefore(START_RELEASE_DATE)) {
             log.info("Дата релиза раньше даты создания кино");
             throw new ValidationException("Дата релиза раньше даты создания кино");
         }
 
-        if(film.getDuration() == null || film.getDuration() <= 0){
+        if (film.getDuration() == null || film.getDuration() <= 0) {
             log.info("Продолжительность фильма должна быть положительной");
             throw new ValidationException("Продолжительность фильма должна быть положительной");
         }
 
         film.setId(++generatedId);
-        films.put(film.getId(),film);
+        films.put(film.getId(), film);
 
         log.info("Результат создания фильма: " + film);
         return film;
@@ -54,32 +54,32 @@ public class FilmController {
     @PutMapping()
     public Film update(@RequestBody Film film) throws ValidationException {
         log.info("Создание фильма: " + film);
-        if(!films.containsKey(film.getId())){
+        if (!films.containsKey(film.getId())) {
             log.info("Такого фильма не существует");
             throw new ValidationException("Такого фильма не существует");
         }
 
-        if(film.getName() == null || film.getName().isBlank()){
+        if (film.getName() == null || film.getName().isBlank()) {
             log.info("У фильма нет названия");
             throw new ValidationException("У фильма нет названия");
         }
 
-        if(film.getDescription().length() > 200){
+        if (film.getDescription().length() > 200) {
             log.info("Длина описания больше 200 символов");
             throw new ValidationException("Длина описания больше 200 символов");
         }
 
-        if(film.getReleaseDate().isBefore(START_RELEASE_DATE)){
+        if (film.getReleaseDate().isBefore(START_RELEASE_DATE)) {
             log.info("Дата релиза раньше даты создания кино");
             throw new ValidationException("Дата релиза раньше даты создания кино");
         }
 
-        if(film.getDuration() == null || film.getDuration() <= 0){
+        if (film.getDuration() == null || film.getDuration() <= 0) {
             log.info("Продолжительность фильма должна быть положительной");
             throw new ValidationException("Продолжительность фильма должна быть положительной");
         }
 
-        if(films.containsKey(film.getId())){
+        if (films.containsKey(film.getId())) {
             films.put(film.getId(), film);
         }
 

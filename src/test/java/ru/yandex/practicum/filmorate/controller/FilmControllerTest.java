@@ -8,9 +8,8 @@ import ru.yandex.practicum.filmorate.model.Film;
 
 import java.time.LocalDate;
 
-import static ru.yandex.practicum.filmorate.controller.FilmController.START_RELEASE_DATE;
-
 public class FilmControllerTest {
+    private final static LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
 
     @BeforeEach
     void setUp() {
@@ -61,7 +60,7 @@ public class FilmControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if(film.getReleaseDate().isBefore(START_RELEASE_DATE)){
+            if (film.getReleaseDate().isBefore(START_RELEASE_DATE)) {
                 throw new ValidationException("Дата релиза раньше даты создания кино");
             }
         });
@@ -76,7 +75,7 @@ public class FilmControllerTest {
                 .build();
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            if(film.getDuration() == null || film.getDuration() <= 0){
+            if (film.getDuration() == null || film.getDuration() <= 0) {
                 throw new ValidationException("Продолжительность фильма должна быть положительной");
             }
         });
