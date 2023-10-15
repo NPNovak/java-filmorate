@@ -9,7 +9,7 @@ import ru.yandex.practicum.filmorate.model.Film;
 import java.time.LocalDate;
 
 public class FilmControllerTest {
-    private final static LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
+    private static final  LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
 
     @BeforeEach
     void setUp() {
