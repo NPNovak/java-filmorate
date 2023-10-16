@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.utils.Validation;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -25,24 +26,8 @@ public class UserController {
     @PostMapping()
     public User create(@RequestBody User user) throws ValidationException {
         log.info("Создание пользователя: " + user);
-        if ((user.getEmail() == null || user.getEmail().isBlank()) || !user.getEmail().contains("@")) {
-            log.info("Электронная почта не может быть пустой и должна содержать символ @");
-            throw new ValidationException("Электронная почта не может быть пустой и должна содержать символ @");
-        }
 
-        if ((user.getLogin() == null || user.getLogin().isBlank()) || user.getLogin().contains(" ")) {
-            log.info("Логин не может быть пустым и содержать пробелы");
-            throw new ValidationException("Логин не может быть пустым и содержать пробелы");
-        }
-
-        if (user.getBirthday().isAfter(LocalDate.now())) {
-            log.info("Дата рождения не может быть в будущем");
-            throw new ValidationException("Дата рождения не может быть в будущем");
-        }
-
-        if ((user.getName() == null || user.getName().isBlank()) && !user.getLogin().isBlank()) {
-            user.setName(user.getLogin());
-        }
+        Validation.userValidation(user);
 
         user.setId(++generatedId);
         users.put(user.getId(), user);
@@ -59,24 +44,7 @@ public class UserController {
             throw new ValidationException("Такого пользователя не существует");
         }
 
-        if ((user.getEmail() == null || user.getEmail().isBlank()) || !user.getEmail().contains("@")) {
-            log.info("Электронная почта не может быть пустой и должна содержать символ @");
-            throw new ValidationException("Электронная почта не может быть пустой и должна содержать символ @");
-        }
-
-        if ((user.getLogin() == null || user.getLogin().isBlank()) || user.getLogin().contains(" ")) {
-            log.info("Логин не может быть пустым и содержать пробелы");
-            throw new ValidationException("Логин не может быть пустым и содержать пробелы");
-        }
-
-        if (user.getBirthday().isAfter(LocalDate.now())) {
-            log.info("Дата рождения не может быть в будущем");
-            throw new ValidationException("Дата рождения не может быть в будущем");
-        }
-
-        if ((user.getName() == null || user.getName().isBlank()) && !user.getLogin().isBlank()) {
-            user.setName(user.getLogin());
-        }
+        Validation.userValidation(user);
 
         users.put(user.getId(), user);
 
