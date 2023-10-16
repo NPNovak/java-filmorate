@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Slf4j
 public class Validation {
     private static final LocalDate START_RELEASE_DATE = LocalDate.of(1895, 12, 28);
+
     public static void filmValidation(Film film) throws ValidationException {
         if (film.getName() == null || film.getName().isBlank()) {
             log.info("У фильма нет названия");
