@@ -29,8 +29,8 @@ public class FilmController {
 
     @GetMapping("/popular")
     public List<Film> getPopularFilms(@RequestParam(defaultValue = "10") String count) {
-        Integer IntCount = Integer.parseInt(count);
-        return filmService.getPopularFilms(IntCount);
+        Integer intCount = Integer.parseInt(count);
+        return filmService.getPopularFilms(intCount);
     }
 
     @PutMapping("/{filmId}/like/{userId}")
