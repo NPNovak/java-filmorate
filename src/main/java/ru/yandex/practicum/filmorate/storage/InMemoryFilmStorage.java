@@ -25,7 +25,7 @@ public class InMemoryFilmStorage implements FilmStorage {
         return films.get(filmId);
     }
 
-    public void likeFilmById(Long filmId, Long userId) throws ValidationException {
+    public void likeFilmById(Long filmId, Long userId) {
         films.get(filmId).getLikes().add(userId);
     }
 
@@ -36,7 +36,7 @@ public class InMemoryFilmStorage implements FilmStorage {
                 .collect(Collectors.toList());
     }
 
-    public void deleteLikeFromFilmById(Long filmId, Long userId) throws ValidationException {
+    public void deleteLikeFromFilmById(Long filmId, Long userId) {
         films.get(filmId).getLikes().remove(userId);
     }
 

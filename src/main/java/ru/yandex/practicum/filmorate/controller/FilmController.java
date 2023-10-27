@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.service.FilmService;
+import ru.yandex.practicum.filmorate.model.IFilmService;
 import ru.yandex.practicum.filmorate.utils.Validation;
 
 import java.util.*;
@@ -15,11 +15,11 @@ import java.util.*;
 @Slf4j
 @RequiredArgsConstructor
 public class FilmController {
-    private final FilmService filmService;
+    private final IFilmService filmService;
 
     @GetMapping()
     public Collection<Film> getAll() {
-        return filmService.getAll().values();
+        return filmService.getAll();
     }
 
     @GetMapping("/{filmId}")

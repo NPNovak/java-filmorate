@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
+import ru.yandex.practicum.filmorate.model.IUserService;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.utils.Validation;
 
 import java.util.Collection;
@@ -17,11 +17,11 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final IUserService userService;
 
     @GetMapping()
     public Collection<User> getAll() {
-        return userService.getAll().values();
+        return userService.getAll();
     }
 
     @GetMapping("/{userId}")
