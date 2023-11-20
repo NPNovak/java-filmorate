@@ -49,7 +49,7 @@ public class UserDbStorage implements UserStorage {
             return stmt;
         }, keyHolder);
 
-        if(keyHolder.getKey() == null){
+        if (keyHolder.getKey() == null) {
             throw new NotFoundException("cant receive user id");
         }
 

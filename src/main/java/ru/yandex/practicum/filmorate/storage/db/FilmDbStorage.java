@@ -56,7 +56,7 @@ public class FilmDbStorage implements FilmStorage {
             return stmt;
         }, keyHolder);
 
-        if(keyHolder.getKey() == null){
+        if (keyHolder.getKey() == null) {
             throw new NotFoundException("cant receive film id");
         }
 
