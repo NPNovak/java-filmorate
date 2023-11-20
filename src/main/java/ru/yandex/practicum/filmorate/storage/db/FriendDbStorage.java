@@ -35,7 +35,6 @@ public class FriendDbStorage implements FriendStorage {
     @Override
     public List<User> getCommonFriends(Long userId, Long friendId) {
         String sqlQuery = "select * from users where id in (select friend_id from friends where user_id = ? intersect select friend_id from friends where user_id = ?);";
-        List<User> users = jdbcTemplate.query(sqlQuery, UserDbStorage::makeUser, userId, friendId);
-        return users;
+        return jdbcTemplate.query(sqlQuery, UserDbStorage::makeUser, userId, friendId);
     }
 }

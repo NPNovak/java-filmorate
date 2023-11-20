@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Mpa;
+import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,11 +18,10 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-//implements FilmStorage
-public class FilmDbStorage {
+public class FilmDbStorage implements FilmStorage {
     private final JdbcTemplate jdbcTemplate;
 
-    //@Override
+    @Override
     public Collection<Film> getAll() {
         String sqlQuery = "select * from films";
         return jdbcTemplate.query(sqlQuery, FilmDbStorage::makeFilm);
@@ -32,7 +32,7 @@ public class FilmDbStorage {
         return jdbcTemplate.query(sqlQuery, FilmDbStorage::makeFilm, count);
     }
 
-    //@Override
+    @Override
     public Film getFilmById(Long id) {
         String sqlQuery = "select * from films f left join mpa m on m.id = f.mpa_id where f.id = ?";
         List<Film> films = jdbcTemplate.query(sqlQuery, FilmDbStorage::makeFilm, id);
@@ -42,7 +42,7 @@ public class FilmDbStorage {
         return films.get(0);
     }
 
-    // @Override
+    @Override
     public Film create(Film film) {
         String sqlQuery = "insert into films(name, release_date, description, duration, mpa_id) values (?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -56,9 +56,14 @@ public class FilmDbStorage {
             return stmt;
         }, keyHolder);
 
+        if(keyHolder.getKey() == null){
+            throw new NotFoundException("cant receive film id");
+        }
+
         return getFilmById(keyHolder.getKey().longValue());
     }
 
+    @Override
     public Film update(Film film) {
         String sqlQuery = "update films set name = ?, release_date = ?, description = ?, duration = ?, mpa_id = ? where id = ?";
         jdbcTemplate.update(sqlQuery, film.getName(), film.getReleaseDate(), film.getDescription(), film.getDuration(), film.getMpa().getId(), film.getId());

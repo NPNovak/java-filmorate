@@ -48,6 +48,11 @@ public class UserDbStorage implements UserStorage {
             stmt.setObject(4, user.getBirthday());
             return stmt;
         }, keyHolder);
+
+        if(keyHolder.getKey() == null){
+            throw new NotFoundException("cant receive user id");
+        }
+
         return getUserById(keyHolder.getKey().longValue());
     }
 

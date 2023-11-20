@@ -8,19 +8,19 @@ import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
-    public Collection<User> getAll();
+    Collection<User> getAll();
 
-    public User getUserById(Long userId) throws NotFoundException;
+    User getUserById(Long userId) throws NotFoundException;
 
-    public User create(User user);
+    User create(User user);
 
-    public User update(User user) throws NotFoundException;
+    User update(User user) throws NotFoundException;
 
-    public void addFriend(Long userId, Long friendId) throws ValidationException;
+    void addFriend(Long userId, Long friendId) throws ValidationException;
 
-    public void deleteFriend(Long userId, Long friendId) throws ValidationException;
+    void deleteFriend(Long userId, Long friendId) throws ValidationException;
 
-    public List<User> getUserFriends(Long userId) throws NotFoundException;
+    List<User> getUserFriends(Long userId) throws NotFoundException;
 
-    public List<User> getUserCommonFriends(Long userId, Long otherId) throws ValidationException;
+    List<User> getUserCommonFriends(Long userId, Long otherId) throws ValidationException;
 }

@@ -3,8 +3,8 @@ import ru.yandex.practicum.filmorate.model.Genre;
 import java.util.Collection;
 
 public interface GenreService {
-    public Collection<Genre> getAll();
+    Collection<Genre> getAll();
 
-    public Genre getById(Long id);
+    Genre getById(Long id);
 
 }

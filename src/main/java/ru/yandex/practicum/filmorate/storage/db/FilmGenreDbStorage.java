@@ -29,7 +29,7 @@ public class FilmGenreDbStorage implements FilmGenreStorage {
 
     public LinkedHashSet<Genre> getGenresByFilm(Long filmId) {
         String sqlQuery = "select * from film_genres fg left join genres g ON fg.genre_id = g.id where fg.film_id = ?";
-        LinkedHashSet<Genre> genres = new LinkedHashSet<Genre>(jdbcTemplate.query(sqlQuery, GenreDbStorage::createGenre, filmId));
+        LinkedHashSet<Genre> genres = new LinkedHashSet<>(jdbcTemplate.query(sqlQuery, GenreDbStorage::createGenre, filmId));
         return genres;
     }
 }

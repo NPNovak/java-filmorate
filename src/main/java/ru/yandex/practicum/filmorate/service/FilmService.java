@@ -7,17 +7,17 @@ import ru.yandex.practicum.filmorate.model.Film;
 import java.util.Collection;
 
 public interface FilmService {
-    public Collection<Film> getAll();
+    Collection<Film> getAll();
 
-    public Film getFilmById(Long filmId);
+    Film getFilmById(Long filmId);
 
-    public void likeFilmById(Long filmId, Long userId) throws ValidationException;
+    void likeFilmById(Long filmId, Long userId) throws ValidationException;
 
-    public Collection<Film> getPopularFilms(Integer count);
+    Collection<Film> getPopularFilms(Integer count);
 
-    public void deleteLikeFromFilmById(Long filmId, Long userId) throws ValidationException;
+    void deleteLikeFromFilmById(Long filmId, Long userId) throws ValidationException;
 
-    public Film create(Film film);
+    Film create(Film film);
 
-    public Film update(@RequestBody Film film) throws ValidationException;
+    Film update(@RequestBody Film film) throws ValidationException;
 }
