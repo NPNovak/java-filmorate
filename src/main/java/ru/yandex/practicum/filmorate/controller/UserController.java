@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/friends/{friendId}")
-    public User addUserFriend(@PathVariable Long userId, @PathVariable Long friendId) throws ValidationException {
-        return userService.addFriend(userId, friendId);
+    public void addUserFriend(@PathVariable Long userId, @PathVariable Long friendId) throws ValidationException {
+        userService.addFriend(userId, friendId);
     }
 
     @DeleteMapping("/{userId}/friends/{friendId}")
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping()
-    public User update(@RequestBody User user) throws ValidationException {
+    public User update(@RequestBody User user) throws NotFoundException, ValidationException {
         log.info("Обновление пользователя: " + user);
         Validation.userValidation(user);
         log.info("Результат обновления пользователя: " + user);
