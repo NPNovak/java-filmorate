@@ -5,23 +5,19 @@ import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 public interface FilmService {
-    public Collection<Film> getAll();
+    Collection<Film> getAll();
 
-    public Map<Long, Film> getFilms();
+    Film getFilmById(Long filmId);
 
-    public Film getFilmById(Long filmId);
+    void likeFilmById(Long filmId, Long userId) throws ValidationException;
 
-    public void likeFilmById(Long filmId, Long userId) throws ValidationException;
+    Collection<Film> getPopularFilms(Integer count);
 
-    public List<Film> getPopularFilms(Integer count);
+    void deleteLikeFromFilmById(Long filmId, Long userId) throws ValidationException;
 
-    public void deleteLikeFromFilmById(Long filmId, Long userId) throws ValidationException;
+    Film create(Film film);
 
-    public Film create(Film film);
-
-    public Film update(@RequestBody Film film) throws ValidationException;
+    Film update(@RequestBody Film film) throws ValidationException;
 }

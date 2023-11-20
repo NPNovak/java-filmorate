@@ -6,24 +6,21 @@ import ru.yandex.practicum.filmorate.model.User;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
-    public Collection<User> getAll();
+    Collection<User> getAll();
 
-    public Map<Long, User> getUsers();
+    User getUserById(Long userId) throws NotFoundException;
 
-    public User getUserById(Long userId) throws NotFoundException;
+    User create(User user);
 
-    public User create(User user);
+    User update(User user) throws NotFoundException;
 
-    public User update(User user) throws ValidationException;
+    void addFriend(Long userId, Long friendId) throws ValidationException;
 
-    public User addFriend(Long userId, Long friendId) throws ValidationException;
+    void deleteFriend(Long userId, Long friendId) throws ValidationException;
 
-    public void deleteFriend(Long userId, Long friendId) throws ValidationException;
+    List<User> getUserFriends(Long userId) throws NotFoundException;
 
-    public List<User> getUserFriends(Long userId) throws NotFoundException;
-
-    public List<User> getUserCommonFriends(Long userId, Long otherId) throws ValidationException;
+    List<User> getUserCommonFriends(Long userId, Long otherId) throws ValidationException;
 }
